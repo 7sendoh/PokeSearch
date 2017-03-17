@@ -220,7 +220,6 @@
 				TargetAttributes = {
 					C7925FCD1E4BCC49004A37AF = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = PL93RW3X63;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -443,10 +442,9 @@
 			baseConfigurationReference = D02D5C822AAE98FF9481C866 /* Pods-PokeSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PL93RW3X63;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PokeSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ringoapps.pokesearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PokeSearch/PokeSearch-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -458,10 +456,9 @@
 			baseConfigurationReference = 91116BC583B12A3D60B8ED28 /* Pods-PokeSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PL93RW3X63;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PokeSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ringoapps.pokesearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PokeSearch/PokeSearch-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
