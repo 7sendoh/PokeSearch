@@ -32,6 +32,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationAuthStatus()
     }
     
+    //Ask user for location access
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             mapView.showsUserLocation = true
@@ -39,7 +40,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             locationManager.requestWhenInUseAuthorization()
         }
     }
-    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.authorizedWhenInUse {
@@ -64,10 +64,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annoIdentifier = "Pokemon"
         var annotationView: MKAnnotationView?
-        if annotation.isKind(of: MKUserLocation.self){
+        if annotation.isKind(of: MKUserLocation.self){  //user location
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User")
             annotationView?.image = UIImage(named: "ash")
-        }else if let deqAnno = mapView.dequeueReusableAnnotationView(withIdentifier: annoIdentifier) {
+        }else if let deqAnno = mapView.dequeueReusableAnnotationView(withIdentifier: annoIdentifier) {  //New pokemon annotation
             annotationView = deqAnno
             annotationView?.annotation = annotation
         }else{
@@ -76,6 +76,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             annotationView = av
         }
         
+        //Set up annotation icon image and map image for pokemon location
         if let annotationView = annotationView, let anno = annotation as? PokeAnnotation{
             annotationView.canShowCallout = true
             annotationView.image = UIImage(named: "\(anno.pokemonNumber)")
@@ -104,12 +105,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         let loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-        showSightingsOnMap(location: loc)
+        showSightingsOnMap(location: loc)   //update pokemon location
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let anno = view.annotation as? PokeAnnotation{
-            
+            //Direct to third party Map application and display the route of reaching the pokemon of the annotation
             var place: MKPlacemark!
             if #available(iOS 10.0, *){
                 place = MKPlacemark(coordinate: anno.coordinate)
@@ -127,6 +128,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    //set location for selected pokemon
     @IBAction func unwindFromPresentationVC(segue: UIStoryboardSegue) {
         if segue.identifier == "unwindFromPresentationVC" {
             if let presentationVC  = segue.source as? UIPresentationController

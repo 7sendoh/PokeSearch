@@ -9,12 +9,13 @@
 import UIKit
 import AVFoundation
 
+//Screen to show pokemon selections, the selected pokemon will be shown on the map
 class UIPresentationController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var filteredPokemon = [Int: String]()
+    var filteredPokemon = [Int: String]()   //Pokemon that is filtered based on search
     var inSearchMode = false
     var selectedPokeId = -1
     
@@ -26,6 +27,7 @@ class UIPresentationController: UIViewController, UICollectionViewDelegate, UICo
         searchBar.returnKeyType = UIReturnKeyType.done
     }
 
+    //Show pokemons in collectionView based on search filter
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokeCell", for: indexPath) as? PokeCell{
             if inSearchMode {
@@ -64,7 +66,7 @@ class UIPresentationController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
+        view.endEditing(true)   //Hide keyboard
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -76,6 +78,7 @@ class UIPresentationController: UIViewController, UICollectionViewDelegate, UICo
             inSearchMode = true
             filteredPokemon = [Int: String]()   //new empty array
             let lower = searchBar.text!.lowercased()
+            //Filter the pokemon based on search and store them into the list
             let filteredPokeArray = pokemon.filter({$0.value.range(of: lower) != nil})
             for result in filteredPokeArray {
                 filteredPokemon[result.key] = result.value
@@ -84,6 +87,7 @@ class UIPresentationController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    //Pass selected pokemon id to main
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if inSearchMode{
             let sortedFilteredArray = filteredPokemon.sorted(by: { $0.key < $1.key})
